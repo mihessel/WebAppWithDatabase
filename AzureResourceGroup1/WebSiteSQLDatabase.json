@@ -459,7 +459,7 @@
       },
       "dependsOn": [ ],
       "tags": {
-        "displayName": "webappstorageaccount01"
+        "displayName": "webappst01"
       },
       "kind": "Storage"
     }
