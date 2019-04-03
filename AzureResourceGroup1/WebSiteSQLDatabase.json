@@ -95,10 +95,44 @@
         "Standard_RAGRS",
         "Premium_LRS"
       ]
+    },
+    "testName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "testAdminUserName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "testAdminPassword": {
+      "type": "securestring"
+    },
+    "testWindowsOSVersion": {
+      "type": "string",
+      "defaultValue": "2012-R2-Datacenter",
+      "allowedValues": [
+        "2008-R2-SP1",
+        "2012-Datacenter",
+        "2012-R2-Datacenter",
+        "Windows-Server-Technical-Preview"
+      ]
     }
   },
   "variables": {
-    "webappstorageaccountName": "[concat('webappstorageaccount', uniqueString(resourceGroup().id))]"
+    "webappstorageaccountName": "[concat('webappstorageaccount', uniqueString(resourceGroup().id))]",
+    "vnet01Prefix": "10.0.0.0/16",
+    "vnet01Subnet1Name": "Subnet-1",
+    "vnet01Subnet1Prefix": "10.0.0.0/24",
+    "vnet01Subnet2Name": "Subnet-2",
+    "vnet01Subnet2Prefix": "10.0.1.0/24",
+    "testImagePublisher": "MicrosoftWindowsServer",
+    "testImageOffer": "WindowsServer",
+    "testOSDiskName": "testOSDisk",
+    "testVmSize": "Standard_D2_v2",
+    "testVnetID": "[resourceId('Microsoft.Network/virtualNetworks', 'vnet01')]",
+    "testSubnetRef": "[concat(variables('testVnetID'), '/subnets/', variables('vnet01Subnet1Name'))]",
+    "testStorageAccountContainerName": "vhds",
+    "testNicName": "[concat(parameters('testName'), 'NetworkInterface')]"
 
   },
   "resources": [
