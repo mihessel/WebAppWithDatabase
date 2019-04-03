@@ -84,9 +84,21 @@
     "sqlserverName": {
       "type": "string",
       "defaultValue": "webappmihessel-sql-demo"
+    },
+    "webappstorageaccountType": {
+      "type": "string",
+      "defaultValue": "Standard_LRS",
+      "allowedValues": [
+        "Standard_LRS",
+        "Standard_ZRS",
+        "Standard_GRS",
+        "Standard_RAGRS",
+        "Premium_LRS"
+      ]
     }
   },
   "variables": {
+    "webappstorageaccountName": "[concat('webappstorageaccount', uniqueString(resourceGroup().id))]"
 
   },
   "resources": [
@@ -402,6 +414,20 @@
       "properties": {
         "ApplicationId": "[parameters('webSiteName')]"
       }
+    },
+    {
+      "name": "[variables('webappstorageaccountName')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "location": "[resourceGroup().location]",
+      "apiVersion": "2016-01-01",
+      "sku": {
+        "name": "[parameters('webappstorageaccountType')]"
+      },
+      "dependsOn": [ ],
+      "tags": {
+        "displayName": "webappstorageaccount"
+      },
+      "kind": "Storage"
     }
   ]
 }
